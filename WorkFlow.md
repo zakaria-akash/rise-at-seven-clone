@@ -20,6 +20,9 @@ The provided source references are:
 - Avoid visual regressions by testing across key breakpoints.
 
 ## Phase 0 - Discovery, Audit, and Baseline
+Status: Completed (2026-05-06)
+Artifact: docs/Phase0-Discovery-Audit-Baseline.md
+
 ### Objective
 Create a complete implementation map from static source assets and establish measurable parity targets.
 
