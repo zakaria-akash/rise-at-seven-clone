@@ -1,26 +1,67 @@
-import { Section } from "@/components/common/Section";
-import { Container } from "@/components/common/Container";
+"use client";
 
-// Clients: renders a responsive grid of client logos using the existing public resources.
+import { useEffect, useRef } from "react";
+
+// Client logos row — matching the reference site's Swiper autoplay infinite scroll
+const LOGO_ITEMS = [
+  { name: "SIXT", text: "SIXT" },
+  { name: "Dojo", text: "Dojo" },
+  { name: "JD Sports", text: "JD Sports" },
+  { name: "Parkdean", text: "Parkdean Resorts" },
+  { name: "PLT", text: "PrettyLittleThing" },
+  { name: "Lloyds Pharmacy", text: "Lloyds Pharmacy" },
+  { name: "Revolution Beauty", text: "Revolution Beauty" },
+  { name: "Pooky", text: "Pooky" },
+  { name: "eSIM", text: "Leading eSIM Brand" },
+  { name: "Red Bull", text: "Red Bull" },
+];
+
 export default function Clients() {
-  const logos = [
-    "/resources/logo-1.png",
-    "/resources/logo-2.png",
-    "/resources/logo-3.png",
-    "/resources/logo-4.png",
-  ];
+  const swiperRef = useRef(null);
+
+  useEffect(() => {
+    let swiperInstance;
+    const init = async () => {
+      const { Swiper } = await import("swiper");
+      const { Autoplay } = await import("swiper/modules");
+      if (!swiperRef.current) return;
+      swiperInstance = new Swiper(swiperRef.current, {
+        modules: [Autoplay],
+        slidesPerView: "auto",
+        spaceBetween: 40,
+        loop: true,
+        autoplay: { delay: 0, disableOnInteraction: false },
+        speed: 5000,
+      });
+    };
+    init();
+    return () => swiperInstance?.destroy(true, true);
+  }, []);
+
+  const allLogos = [...LOGO_ITEMS, ...LOGO_ITEMS];
 
   return (
-    <Section tight eyebrow="Clients" title="Trusted by" description="A selection of clients we've helped to discover and grow.">
-      <Container>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 items-center">
-          {logos.map((src, i) => (
-            <div key={i} className="flex items-center justify-center p-4">
-              <img src={src} alt={`Client ${i + 1}`} className="max-h-12 object-contain" />
+    <div className="w-full relative overflow-hidden py-4">
+      {/* Blur edges */}
+      <div className="section-blur section-blur--left" aria-hidden="true" />
+      <div className="section-blur section-blur--right" aria-hidden="true" />
+
+      <div ref={swiperRef} className="swiper">
+        <div className="swiper-wrapper items-center">
+          {allLogos.map((logo, i) => (
+            <div
+              key={i}
+              className="swiper-slide !w-auto flex items-center"
+            >
+              <div className="px-8 py-5 flex items-center">
+                <span className="text-grey-900 font-semibold text-lg tracking-tight whitespace-nowrap opacity-60 hover:opacity-100 transition-opacity">
+                  {logo.text}
+                </span>
+              </div>
             </div>
           ))}
         </div>
-      </Container>
-    </Section>
+      </div>
+    </div>
   );
 }

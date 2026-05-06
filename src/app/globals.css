@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
-/* Phase 1 foundation tokens: these mirror the extracted palette, typography, spacing, and motion values. */
-:root {
-  --font-sans-primary: "saans", ui-sans-serif, system-ui, sans-serif;
-  --font-mono-primary: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+/* ============================================================
+   DESIGN TOKENS — extracted from the riseatseven.com source
+   ============================================================ */
+@theme inline {
+  --font-sans-primary: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono-primary: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   --color-grey-50: #f7f7f7;
   --color-grey-100: #efeeec;
@@ -18,190 +20,360 @@
   --color-white: #fff;
   --color-black: #000;
   --color-mint: #b2f6e3;
+  --mask-colour: #b2f6e3;
 
   --tracking-tightish: -0.025em;
   --tracking-tight: -0.035em;
-  --tracking-normal: 0em;
-  --tracking-wide: 0.025em;
-  --tracking-wider: 0.05em;
 
-  --leading-0-9: 0.9;
+  --leading-09: 0.9;
   --leading-tight: 1.25;
   --leading-snug: 1.375;
   --leading-normal: 1.5;
-  --leading-relaxed: 1.625;
 
   --transition-base: 0.6s;
   --transition-quick: 0.25s;
   --transition-smooth: cubic-bezier(0.135, 0.9, 0.15, 1);
-  --transition-in: cubic-bezier(0.4, 0, 1, 1);
-  --transition-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-smooth: cubic-bezier(0.135, 0.9, 0.15, 1);
 
   --page-gutter: clamp(1rem, 2vw, 2rem);
   --page-max-width: 90rem;
   --section-space-y: clamp(4rem, 8vw, 7.5rem);
   --section-space-y-tight: clamp(2.5rem, 5vw, 4.5rem);
-
-  --vh: 1vh;
-  --screen-fix: calc(var(--vh) * 100);
-  --screen-fix-110: calc(var(--vh) * 110);
 }
 
-/* Base reset keeps the clone stable across browsers before component styling takes over. */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* ============================================================
+   BASE RESET — must be inside @layer base for Tailwind v4
+   (unlayered rules override Tailwind utility classes!)
+   ============================================================ */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-/* The page root follows the reference site's light neutral shell and smooth scrolling behavior. */
-html {
-  min-height: 100%;
-  color-scheme: light;
-  text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-}
+  html {
+    min-height: 100%;
+    color-scheme: light;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
 
-/* Global body styles establish the visual foundation used by all future homepage sections. */
-body {
-  min-height: 100vh;
+  body {
+    min-height: 100vh;
     background: var(--color-grey-100);
     color: var(--color-grey-400);
     font-family: var(--font-sans-primary);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
     overflow-x: hidden;
-    scroll-behavior: smooth;
-}
-
-/* Selection styling echoes the accent color from the source homepage. */
-body::selection {
-  background: var(--color-mint);
-  color: var(--color-grey-900);
-}
-
-/* Neutral link reset keeps future nav and CTA components visually controlled. */
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* Media defaults prevent inline gaps and preserve full-width responsive assets. */
-img,
-svg,
-video,
-canvas {
-  display: block;
-  max-width: 100%;
-}
-
-/* Form controls inherit the same type scale as the rest of the interface. */
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
-
-/* Button reset lets the shared Button primitive define all interaction styling explicitly. */
-button {
-  background: transparent;
-  border: 0;
-}
-
-/* Page shell helpers create the light atmospheric background used by the foundation screen. */
-.page-shell {
-  min-height: 100vh;
-  background:
-      radial-gradient(circle at top left, rgba(178, 246, 227, 0.48), transparent 26%),
-      radial-gradient(circle at top right, rgba(255, 255, 255, 0.28), transparent 24%),
-      linear-gradient(180deg, #f5f4f1 0%, #efeeec 38%, #eceae7 100%);
   }
-  
-  /* Shared inner wrapper keeps the content centered at the reference site's wide layout width. */
-  .page-shell__inner {
+
+  ::selection {
+    background: var(--color-mint);
+    color: var(--color-grey-900);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    display: block;
+    max-width: 100%;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+}
+
+/* ============================================================
+   LAYOUT UTILITIES
+   ============================================================ */
+@layer components {
+  /* Centered page wrapper */
+  .page-inner {
     width: min(100%, var(--page-max-width));
     margin: 0 auto;
     padding-inline: var(--page-gutter);
   }
-  
-  /* Section spacing mirrors the vertical rhythm extracted from the homepage styles. */
-  .section-shell {
-    padding-block: var(--section-space-y);
+
+  /* ============================================================
+     CIRCLE MASK HOVER EFFECT
+     The overlay uses clip-path: circle(0%) and expands to 150%
+     on hover of the parent .circle-mask-container.
+     ============================================================ */
+  .circle-mask-container {
+    position: relative;
   }
-  
-  .section-shell--tight {
-    padding-block: var(--section-space-y-tight);
+
+  .circle-mask {
+    position: absolute;
+    inset: 0;
+    clip-path: circle(0% at 50% 130%);
+    transition: clip-path 0.6s cubic-bezier(0.135, 0.9, 0.15, 1);
+    will-change: clip-path;
   }
-  
-  /* Eyebrow pills are used for the compact, uppercase labels common in the source design. */
-  .section-eyebrow {
+
+  .circle-mask-container:hover .circle-mask,
+  .circle-mask-container.is-active .circle-mask {
+    clip-path: circle(150% at 50% 130%);
+  }
+
+  /* ============================================================
+     SECTION BLUR EDGES (used in the clients logo carousel)
+     ============================================================ */
+  .section-blur {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 10vw;
+    max-width: 8rem;
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .section-blur--left {
+    left: 0;
+    background: linear-gradient(to right, var(--color-grey-100), transparent);
+  }
+
+  .section-blur--right {
+    right: 0;
+    background: linear-gradient(to left, var(--color-grey-100), transparent);
+  }
+
+  /* ============================================================
+     BUTTON COMPONENT
+     ============================================================ */
+  .btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
-    padding: 0.45rem 0.8rem;
     border-radius: 999px;
-    background: rgba(17, 18, 18, 0.06);
-    color: var(--color-grey-300);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
+    font-family: var(--font-sans-primary);
+    font-weight: 500;
+    letter-spacing: var(--tracking-tightish);
+    line-height: 1.2;
+    transition: border-radius 0.3s var(--transition-smooth),
+                background 0.3s var(--transition-smooth),
+                transform 0.3s var(--transition-smooth);
+    text-transform: capitalize;
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    overflow: hidden;
+    position: relative;
   }
-  
-  /* Balance long headings so the future homepage copy reads like the reference composition. */
+
+  .btn:hover {
+    border-radius: 0.75rem;
+  }
+
+  .btn--white {
+    background: white;
+    color: var(--color-grey-900);
+  }
+
+  .btn--dark {
+    background: var(--color-grey-900);
+    color: white;
+  }
+
+  .btn--mint {
+    background: var(--color-mint);
+    color: var(--color-grey-900);
+  }
+
+  .btn--ghost {
+    background: transparent;
+    color: var(--color-grey-900);
+    border-color: transparent;
+  }
+
+  /* ============================================================
+     SCROLL TEXT HOVER ANIMATION (text slides up on hover)
+     ============================================================ */
+  .text-hover-wrap {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    flex-direction: column;
+  }
+
+  .text-hover-wrap .text-hover-primary {
+    transition: transform 0.3s var(--transition-smooth);
+  }
+
+  .text-hover-wrap .text-hover-secondary {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(100%);
+    transition: transform 0.3s var(--transition-smooth);
+  }
+
+  @media (hover: hover) {
+    .text-hover-wrap:hover .text-hover-primary {
+      transform: translateY(-100%);
+    }
+    .text-hover-wrap:hover .text-hover-secondary {
+      transform: translateY(0);
+    }
+  }
+
+  /* ============================================================
+     HIDE CURSOR (used with custom cursor)
+     ============================================================ */
+  .hide-cursor,
+  .hide-cursor * {
+    cursor: none !important;
+  }
+
+  /* ============================================================
+     SWIPER CUSTOMISATION
+     ============================================================ */
+  .swiper-pagination-progressbar {
+    background: rgba(17, 18, 18, 0.1) !important;
+    height: 2px !important;
+  }
+
+  .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+    background: var(--color-grey-900) !important;
+  }
+
+  /* ============================================================
+     MEGA MENU OVERLAY
+     ============================================================ */
+  .mega-menu {
+    position: absolute;
+    top: calc(100% + 2.5rem);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .mega-menu.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ============================================================
+     ANNOUNCEMENT BAR
+     ============================================================ */
+  .announcement-bar {
+    background: var(--color-mint);
+    color: var(--color-grey-900);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    letter-spacing: var(--tracking-tight);
+    text-align: center;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s var(--transition-smooth);
+    position: relative;
+    z-index: 60;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .announcement-bar:hover {
+    border-radius: 0.5rem;
+  }
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+@layer utilities {
+  .font-sans-primary {
+    font-family: var(--font-sans-primary);
+  }
+
+  .text-grey-900 {
+    color: var(--color-grey-900);
+  }
+
+  .text-grey-800 {
+    color: var(--color-grey-800);
+  }
+
+  .text-grey-600 {
+    color: var(--color-grey-600);
+  }
+
+  .text-grey-400 {
+    color: var(--color-grey-400);
+  }
+
+  .text-grey-300 {
+    color: var(--color-grey-300);
+  }
+
+  .text-grey-200 {
+    color: var(--color-grey-200);
+  }
+
+  .text-mint {
+    color: var(--color-mint);
+  }
+
+  .bg-grey-900 {
+    background-color: var(--color-grey-900);
+  }
+
+  .bg-grey-100 {
+    background-color: var(--color-grey-100);
+  }
+
+  .bg-grey-50 {
+    background-color: var(--color-grey-50);
+  }
+
+  .bg-mint {
+    background-color: var(--color-mint);
+  }
+
+  .tracking-tightish {
+    letter-spacing: var(--tracking-tightish);
+  }
+
+  .h-screen-fix {
+    height: 100svh;
+  }
+
   .text-balance {
     text-wrap: balance;
   }
-  
-  /* Soft glass panel used by the Phase 1 hero cards to echo the site's airy surfaces. */
-  .soft-panel {
-    border: 1px solid rgba(17, 18, 18, 0.08);
-    background: rgba(255, 255, 255, 0.58);
-    backdrop-filter: blur(14px);
-    box-shadow: 0 28px 80px rgba(17, 18, 18, 0.08);
-  }
-  
-  /* Grid and card utilities give the foundation screen a compact token summary layout. */
-  .token-grid {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-  }
-  
-  .token-card {
-    padding: 1rem;
-    border-radius: 1.25rem;
-    background: rgba(255, 255, 255, 0.72);
-    border: 1px solid rgba(17, 18, 18, 0.08);
-  }
-  
-  .token-card__label {
-    color: var(--color-grey-300);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
-  }
-  
-  .token-card__value {
-    margin-top: 0.35rem;
-    color: var(--color-grey-900);
-    font-size: 0.95rem;
-    line-height: var(--leading-normal);
-  }
-  
-  /* Two-column hero layout for the foundation page, collapsing on smaller screens. */
-  .foundation-hero {
-    display: grid;
-    gap: 1.5rem;
-    align-items: start;
-    grid-template-columns: minmax(0, 1.4fr) minmax(19rem, 0.9fr);
-  }
-  
-  @media (max-width: 56rem) {
-    .foundation-hero {
-      grid-template-columns: 1fr;
-    }
 }
