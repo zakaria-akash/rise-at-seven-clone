@@ -1,25 +1,207 @@
 @import "tailwindcss";
 
+/* Phase 1 foundation tokens: these mirror the extracted palette, typography, spacing, and motion values. */
+:root {
+  --font-sans-primary: "saans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono-primary: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+  --color-grey-50: #f7f7f7;
+  --color-grey-100: #efeeec;
+  --color-grey-150: #e9e9e9;
+  --color-grey-200: #bebebe;
+  --color-grey-300: #6a6a6a;
+  --color-grey-400: #282828;
+  --color-grey-500: #1f1f1f;
+  --color-grey-600: #1a1a1a;
+  --color-grey-800: #121212;
+  --color-grey-900: #111212;
+  --color-white: #fff;
+  --color-black: #000;
+  --color-mint: #b2f6e3;
+
+  --tracking-tightish: -0.025em;
+  --tracking-tight: -0.035em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+
+  --leading-0-9: 0.9;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+
+  --transition-base: 0.6s;
+  --transition-quick: 0.25s;
+  --transition-smooth: cubic-bezier(0.135, 0.9, 0.15, 1);
+  --transition-in: cubic-bezier(0.4, 0, 1, 1);
+  --transition-out: cubic-bezier(0, 0, 0.2, 1);
+
+  --page-gutter: clamp(1rem, 2vw, 2rem);
+  --page-max-width: 90rem;
+  --section-space-y: clamp(4rem, 8vw, 7.5rem);
+  --section-space-y-tight: clamp(2.5rem, 5vw, 4.5rem);
+
+  --vh: 1vh;
+  --screen-fix: calc(var(--vh) * 100);
+  --screen-fix-110: calc(var(--vh) * 110);
+}
+
+/* Base reset keeps the clone stable across browsers before component styling takes over. */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-body {
-  background-color: #000000;
-  color: #ffffff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
+/* The page root follows the reference site's light neutral shell and smooth scrolling behavior. */
 html {
-  height: 100%;
+  min-height: 100%;
+  color-scheme: light;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
+/* Global body styles establish the visual foundation used by all future homepage sections. */
 body {
   min-height: 100vh;
+    background: var(--color-grey-100);
+    color: var(--color-grey-400);
+    font-family: var(--font-sans-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* Selection styling echoes the accent color from the source homepage. */
+body::selection {
+  background: var(--color-mint);
+  color: var(--color-grey-900);
+}
+
+/* Neutral link reset keeps future nav and CTA components visually controlled. */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Media defaults prevent inline gaps and preserve full-width responsive assets. */
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+/* Form controls inherit the same type scale as the rest of the interface. */
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Button reset lets the shared Button primitive define all interaction styling explicitly. */
+button {
+  background: transparent;
+  border: 0;
+}
+
+/* Page shell helpers create the light atmospheric background used by the foundation screen. */
+.page-shell {
+  min-height: 100vh;
+  background:
+      radial-gradient(circle at top left, rgba(178, 246, 227, 0.48), transparent 26%),
+      radial-gradient(circle at top right, rgba(255, 255, 255, 0.28), transparent 24%),
+      linear-gradient(180deg, #f5f4f1 0%, #efeeec 38%, #eceae7 100%);
+  }
+  
+  /* Shared inner wrapper keeps the content centered at the reference site's wide layout width. */
+  .page-shell__inner {
+    width: min(100%, var(--page-max-width));
+    margin: 0 auto;
+    padding-inline: var(--page-gutter);
+  }
+  
+  /* Section spacing mirrors the vertical rhythm extracted from the homepage styles. */
+  .section-shell {
+    padding-block: var(--section-space-y);
+  }
+  
+  .section-shell--tight {
+    padding-block: var(--section-space-y-tight);
+  }
+  
+  /* Eyebrow pills are used for the compact, uppercase labels common in the source design. */
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.8rem;
+    border-radius: 999px;
+    background: rgba(17, 18, 18, 0.06);
+    color: var(--color-grey-300);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+  }
+  
+  /* Balance long headings so the future homepage copy reads like the reference composition. */
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Soft glass panel used by the Phase 1 hero cards to echo the site's airy surfaces. */
+  .soft-panel {
+    border: 1px solid rgba(17, 18, 18, 0.08);
+    background: rgba(255, 255, 255, 0.58);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 28px 80px rgba(17, 18, 18, 0.08);
+  }
+  
+  /* Grid and card utilities give the foundation screen a compact token summary layout. */
+  .token-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  }
+  
+  .token-card {
+    padding: 1rem;
+    border-radius: 1.25rem;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(17, 18, 18, 0.08);
+  }
+  
+  .token-card__label {
+    color: var(--color-grey-300);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+  }
+  
+  .token-card__value {
+    margin-top: 0.35rem;
+    color: var(--color-grey-900);
+    font-size: 0.95rem;
+    line-height: var(--leading-normal);
+  }
+  
+  /* Two-column hero layout for the foundation page, collapsing on smaller screens. */
+  .foundation-hero {
+    display: grid;
+    gap: 1.5rem;
+    align-items: start;
+    grid-template-columns: minmax(0, 1.4fr) minmax(19rem, 0.9fr);
+  }
+  
+  @media (max-width: 56rem) {
+    .foundation-hero {
+      grid-template-columns: 1fr;
+    }
 }
