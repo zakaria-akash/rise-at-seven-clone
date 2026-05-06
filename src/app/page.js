@@ -1,4 +1,10 @@
 import { Button, Container, Icon, Section } from "@/components/common";
+import Header from "@/components/home/Header";
+import Hero from "@/components/home/Hero";
+import Clients from "@/components/home/Clients";
+import FeaturedWork from "@/components/home/FeaturedWork";
+import ServicesList from "@/components/home/ServicesList";
+import Footer from "@/components/home/Footer";
 
 // These cards summarize the Phase 1 foundation work that is now in place.
 const foundationTokens = [
@@ -11,6 +17,12 @@ const foundationTokens = [
 export default function Home() {
   return (
     <main className="page-shell">
+      <Header />
+      <Hero />
+
+      <Clients />
+      <FeaturedWork />
+      <ServicesList />
       {/* Foundation hero: communicates that the app structure and shared primitives are ready. */}
       <Section
         eyebrow="Phase 1 Foundation"
