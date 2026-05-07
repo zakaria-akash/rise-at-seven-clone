@@ -38,28 +38,40 @@ function BlogCard({ post }) {
       href={post.href}
       className="w-full flex flex-col items-start gap-y-5 transition hover:-translate-y-2 circle-mask-container"
     >
-      {/* Image */}
+      {/* Image Stacking */}
       <div className="w-full grid">
-        <div className="col-start-1 row-start-1 z-20 p-3">
-          <div className="flex flex-wrap gap-1">
-            <div className="inline-flex items-center font-medium tracking-tight leading-none rounded-full text-sm gap-x-2 px-3 py-1 text-white bg-white/20 backdrop-blur-sm">
-              {post.category}
+        {/* Blurred background layer (revealed on hover via circle mask) */}
+        <div className="col-start-1 row-start-1 z-10 relative rounded-2xl lg:rounded-3xl overflow-hidden aspect-square">
+          <div className="w-full h-full transition blur-md duration-1000 scale-120 circle-mask">
+            <img 
+              src={post.image} 
+              alt="" 
+              className="h-full w-full object-cover absolute top-0 left-0" 
+              loading="lazy" 
+            />
+          </div>
+        </div>
+        {/* Base image layer */}
+        <div className="col-start-1 row-start-1 aspect-square relative rounded-2xl lg:rounded-3xl overflow-hidden">
+          <div className="col-start-1 row-start-1 z-20 p-3 absolute top-0 left-0">
+            <div className="flex flex-wrap gap-1">
+              <div className="inline-flex items-center font-medium tracking-tight leading-none rounded-full text-sm gap-x-2 px-3 py-1 text-white bg-white/20 backdrop-blur-sm">
+                {post.category}
+              </div>
             </div>
           </div>
-        </div>
-        {/* Blurred hover layer */}
-        <div className="col-start-1 row-start-1 z-10 relative rounded-2xl lg:rounded-3xl overflow-hidden aspect-square">
-          <div className="w-full h-full transition blur-md duration-1000 scale-110 circle-mask">
-            <img src={post.image} alt="" className="h-full w-full object-cover absolute top-0 left-0" loading="lazy" style={{ opacity: 0 }} onLoad={(e) => { e.currentTarget.style.opacity = "1"; }} />
-          </div>
-        </div>
-        {/* Base image */}
-        <div className="col-start-1 row-start-1 aspect-square relative rounded-2xl lg:rounded-3xl overflow-hidden">
-          <img src={post.image} alt={post.title} className="h-full w-full object-cover absolute top-0 left-0" loading="lazy" style={{ opacity: 0 }} onLoad={(e) => { e.currentTarget.style.opacity = "1"; }} />
+          <img 
+            src={post.image} 
+            alt={post.title} 
+            className="h-full w-full object-cover absolute top-0 left-0 transition-opacity duration-500" 
+            loading="lazy" 
+            onLoad={(e) => { e.currentTarget.style.opacity = "1"; }}
+            style={{ opacity: 0 }}
+          />
         </div>
       </div>
 
-      {/* Meta */}
+      {/* Meta Content */}
       <div className="flex flex-col items-start gap-y-3">
         <div className="flex items-center gap-1 mt-1">
           <div className="inline-flex items-center font-medium tracking-tight leading-none rounded-full text-sm gap-x-2 px-3 py-1 text-grey-300 bg-white">
@@ -75,7 +87,7 @@ function BlogCard({ post }) {
             <span>{post.readTime}</span>
           </div>
         </div>
-        <h2 className="text-grey-900 text-2xl xl:text-3xl font-medium tracking-tight font-sans-primary leading-tight">
+        <h2 className="text-grey-900 text-2xl xl:text-3xl font-medium tracking-tight font-sans-primary leading-tight text-balance">
           {post.title}
         </h2>
       </div>
@@ -92,6 +104,7 @@ export default function BlogSection() {
       const { Swiper } = await import("swiper");
       const { Pagination } = await import("swiper/modules");
       if (!swiperRef.current) return;
+      
       sw = new Swiper(swiperRef.current, {
         modules: [Pagination],
         slidesPerView: 1.15,
@@ -104,7 +117,10 @@ export default function BlogSection() {
           1024: { loop: false, slidesPerView: 3, spaceBetween: 15, slidesOffsetBefore: 0 },
           1280: { loop: false, slidesPerView: 3, spaceBetween: 20, slidesOffsetBefore: 0 },
         },
-        pagination: { el: ".blog-pagination", type: "progressbar" },
+        pagination: { 
+          el: ".blog-pagination", 
+          type: "progressbar" 
+        },
       });
     };
     init();
@@ -115,39 +131,43 @@ export default function BlogSection() {
     <section className="w-full pb-12 xl:pb-24">
       <div className="w-full px-0">
         <div className="grid grid-cols-12 gap-y-3 md:gap-y-7 gap-x-3 md:gap-x-5">
-          {/* Heading row */}
-          <div className="col-span-12 px-4 md:px-7">
-            <div className="grid grid-cols-12 md:border-b md:border-grey-200 md:pb-5 gap-y-3 gap-x-3">
-              <div className="col-span-11 md:col-span-9 flex items-end">
-                <h2 className="text-grey-900 text-6xl md:text-7xl lg:text-7xl font-medium tracking-tight font-sans-primary leading-[0.9] inline-flex flex-wrap gap-x-3 items-baseline">
-                  <span>What&apos;s</span>
-                  {/* Inline image */}
-                  <span
-                    className="inline-block shrink-0 relative overflow-hidden rounded-sm bg-black/10"
-                    style={{ width: "0.7em", height: "0.85em", verticalAlign: "middle" }}
-                    aria-hidden="true"
-                  >
-                    <img
-                      src="https://rise-atseven.transforms.svdcdn.com/production/images/FOS25-3380.jpg?w=200&h=200&q=80&auto=format&fit=crop&dm=1750846499"
-                      alt=""
-                      className="w-full h-full object-cover absolute inset-0"
-                    />
-                  </span>
-                  <span>New</span>
-                </h2>
-              </div>
-              <div className="col-span-12 md:col-span-3 md:items-center md:justify-end hidden md:flex">
-                <a href="https://riseatseven.com/blog/" className="btn btn--white flex-row-reverse">
-                  <span>Explore More Thoughts</span>
-                  <i className="fa-regular fa-sharp fa-arrow-up-right text-xs" aria-hidden="true" />
+          {/* Header Row */}
+          <div className="col-span-12 px-4 md:px-7 border-b border-grey-200 pb-5 mb-5">
+            <div className="flex items-end justify-between">
+              <h2 className="text-grey-900 text-6xl md:text-7xl lg:text-7xl font-medium tracking-tight font-sans-primary leading-[0.9] flex items-center flex-wrap gap-x-3">
+                <span>What&apos;s</span>
+                <span
+                  className="inline-block shrink-0 relative overflow-hidden rounded-sm bg-black/10 mx-1"
+                  style={{ width: "0.7em", height: "0.85em" }}
+                >
+                  <img
+                    src="https://rise-atseven.transforms.svdcdn.com/production/images/FOS25-3380.jpg?w=200&h=200&q=80&auto=format&fit=crop&dm=1750846499"
+                    alt=""
+                    className="w-full h-full object-cover absolute inset-0"
+                  />
+                </span>
+                <span>New</span>
+              </h2>
+              <div className="hidden md:block">
+                <a href="https://riseatseven.com/blog/" className="btn btn--white flex-row-reverse group">
+                  <div className="relative overflow-hidden">
+                    <div className="transition group-hover:-translate-y-6 flex items-center gap-x-2">
+                      <span>Explore More Thoughts</span>
+                      <i className="fa-regular fa-sharp fa-arrow-up-right text-xs" />
+                    </div>
+                    <div className="transition absolute top-0 left-0 translate-y-6 group-hover:translate-y-0 flex items-center gap-x-2">
+                      <span>Explore More Thoughts</span>
+                      <i className="fa-regular fa-sharp fa-arrow-up-right text-xs" />
+                    </div>
+                  </div>
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Swiper */}
+          {/* Carousel */}
           <div className="col-span-12 lg:px-7">
-            <div ref={swiperRef} className="swiper">
+            <div ref={swiperRef} className="swiper w-full">
               <div className="swiper-wrapper">
                 {POSTS.map((post, i) => (
                   <div key={i} className="py-2 swiper-slide">
@@ -156,7 +176,17 @@ export default function BlogSection() {
                 ))}
               </div>
             </div>
-            <div className="blog-pagination swiper-pagination mt-3" />
+            {/* Pagination Progress Bar */}
+            <div className="px-4 md:px-0 mt-8">
+               <div className="blog-pagination swiper-pagination !relative !w-full" />
+            </div>
+          </div>
+          
+          {/* Mobile CTA */}
+          <div className="col-span-12 px-4 md:hidden">
+             <a href="https://riseatseven.com/blog/" className="btn btn--white w-full justify-center">
+                Explore More Thoughts
+             </a>
           </div>
         </div>
       </div>

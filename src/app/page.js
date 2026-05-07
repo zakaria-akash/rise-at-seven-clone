@@ -5,6 +5,7 @@ import Clients from "@/components/home/Clients";
 import FeaturedWork from "@/components/home/FeaturedWork";
 import LegacySection from "@/components/home/LegacySection";
 import BlogSection from "@/components/home/BlogSection";
+import ReadyToRise from "@/components/home/ReadyToRise";
 import Footer from "@/components/home/Footer";
 
 export default function Home() {
@@ -32,6 +33,7 @@ export default function Home() {
         <BlogSection />
       </main>
 
+      <ReadyToRise />
       <Footer />
     </>
   );
