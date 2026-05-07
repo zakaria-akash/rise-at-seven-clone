@@ -1,6 +1,7 @@
 import Header from "@/components/home/Header";
 import Hero from "@/components/home/Hero";
 import HeadlineSection from "@/components/home/HeadlineSection";
+import ServicesList from "@/components/home/ServicesList";
 import Clients from "@/components/home/Clients";
 import FeaturedWork from "@/components/home/FeaturedWork";
 import LegacySection from "@/components/home/LegacySection";
@@ -23,9 +24,11 @@ export default function Home() {
         {/* About / "Driving Demand & Discovery" headline */}
         <HeadlineSection />
 
-
         {/* Featured Work — dark section with parallax names + circle-mask cards */}
         <FeaturedWork />
+
+        {/* Our Services section */}
+        <ServicesList />
 
         {/* Legacy In The Making — stacked cards with GSAP scroll animation */}
         <LegacySection />

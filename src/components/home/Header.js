@@ -26,7 +26,7 @@ const MEGA_MENUS = {
         ],
       },
     ],
-    image: "https://rise-atseven.transforms.svdcdn.com/production/images/0B5A6875.jpg?w=400&h=400&q=80&auto=format&fit=crop&dm=1774455015",
+    image: "/images/header-menus-cover/Services.jpg",
   },
   industries: {
     id: "industries",
@@ -39,7 +39,7 @@ const MEGA_MENUS = {
         links: [{ label: "B2B Marketing", href: "https://riseatseven.com/services/b2b-marketing/" }],
       },
     ],
-    image: "https://rise-atseven.transforms.svdcdn.com/production/images/0B5A6875.jpg?w=400&h=400&q=80&auto=format&fit=crop&dm=1774455015",
+    image: "/images/header-menus-cover/Industries.jpg",
   },
   international: {
     id: "international",
@@ -57,7 +57,7 @@ const MEGA_MENUS = {
         ],
       },
     ],
-    image: "https://rise-atseven.transforms.svdcdn.com/production/images/d4df0d30-d590-4e94-9056-9491f4beacba.JPG?w=400&h=400&q=80&auto=format&fit=crop&dm=1750847714",
+    image: "/images/header-menus-cover/International.jpg",
   },
   about: {
     id: "about",
@@ -75,7 +75,7 @@ const MEGA_MENUS = {
         ],
       },
     ],
-    image: "https://rise-atseven.transforms.svdcdn.com/production/images/0B5A7487.jpg?w=400&h=400&q=80&auto=format&fit=crop&dm=1751838846",
+    image: "/images/header-menus-cover/About.jpg",
   },
 };
 
@@ -273,28 +273,40 @@ export default function Header() {
                       </a>
                       {item.children.length > 0 && (
                         <button
-                          className={cn(
-                            "w-6 h-6 rounded-full flex items-center justify-center text-white text-xs border border-white border-solid transition-transform duration-300",
-                            mobileExpanded === item.label && "rotate-180",
-                          )}
+                          className="w-8 h-8 rounded-full flex items-center justify-center text-white border border-white border-solid transition-transform duration-300"
                           onClick={() => setMobileExpanded(mobileExpanded === item.label ? null : item.label)}
                           aria-label={`Expand ${item.label}`}
                         >
-                          <i className="fa-sharp fa-regular fa-angle-down" />
+                          {mobileExpanded === item.label ? (
+                            <i className="fa-solid fa-chevron-up text-sm leading-none" aria-hidden="true" />
+                          ) : (
+                            <i className="fa-solid fa-chevron-down text-sm leading-none" aria-hidden="true" />
+                          )}
                         </button>
                       )}
                     </div>
-                    {item.children.length > 0 && mobileExpanded === item.label && (
-                      <div className="grid gap-y-1 py-4">
-                        {item.children.map((child, i) => (
-                          <a
-                            key={child}
-                            href={item.childHrefs[i]}
-                            className="inline-flex tracking-tight leading-tight font-medium text-white text-xl"
-                          >
-                            {child}
-                          </a>
-                        ))}
+                    {item.children.length > 0 && (
+                      <div
+                        className={cn(
+                          "grid overflow-hidden transition-[grid-template-rows,opacity] duration-500 ease-smooth",
+                          mobileExpanded === item.label
+                            ? "grid-rows-[1fr] opacity-100"
+                            : "grid-rows-[0fr] opacity-0 pointer-events-none",
+                        )}
+                      >
+                        <div className="min-h-0 overflow-hidden pt-4">
+                          <div className="grid gap-y-1">
+                            {item.children.map((child, i) => (
+                              <a
+                                key={child}
+                                href={item.childHrefs[i]}
+                                className="inline-flex tracking-tight leading-tight font-medium text-white text-xl"
+                              >
+                                {child}
+                              </a>
+                            ))}
+                          </div>
+                        </div>
                       </div>
                     )}
                   </div>
