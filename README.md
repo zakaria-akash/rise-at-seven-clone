@@ -2,6 +2,8 @@
 
 > A **production-ready, fully responsive homepage clone** of Rise at Seven's marketing website, featuring advanced scroll animations, optimized image loading, professional mega menus with preview images, and seamless mobile interactions.
 
+### 🔗 [Live Demo](https://rise-at-seven-clone-six.vercel.app/) — View the deployed app now!
+
 [![Next.js 16.2.4](https://img.shields.io/badge/Next.js-16.2.4-black?logo=nextdotjs)](https://nextjs.org)
 [![React 19.2.4](https://img.shields.io/badge/React-19.2.4-61dafb?logo=react)](https://react.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38bdf8?logo=tailwindcss)](https://tailwindcss.com)
@@ -26,14 +28,18 @@
 - [Contributing](#contributing)
 - [License](#license)
 
----
+# Rise at Seven — Homepage Clone
 
-## Overview
+> A **production-ready, fully responsive homepage clone** of Rise at Seven's marketing website, featuring advanced scroll animations, optimized image loading, professional mega menus with preview images, and seamless mobile interactions.
 
-**Rise at Seven** is a search-first content marketing agency clone featuring a modern, interactive homepage with professional navigation, advanced animations, and optimized responsive design. This project demonstrates enterprise-level web development best practices.
+### 🔗 [Live Demo](https://rise-at-seven-clone-six.vercel.app/) — View the deployed app now
 
-### Key Achievements
-
+[![Next.js 16.2.4](https://img.shields.io/badge/Next.js-16.2.4-black?logo=nextdotjs)](https://nextjs.org)
+[![React 19.2.4](https://img.shields.io/badge/React-19.2.4-61dafb?logo=react)](https://react.dev)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38bdf8?logo=tailwindcss)](https://tailwindcss.com)
+[![GSAP](https://img.shields.io/badge/GSAP-ScrollTrigger-88ce02)](https://greensock.com)
+[![Build Status](https://img.shields.io/badge/Build-Passing-green)](https://nextjs.org)
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed-Vercel-black?logo=vercel)](https://vercel.com)
 - ✨ **Advanced Animations**: GSAP ScrollTrigger parallax, horizontal scroll text, smooth menu reveals
 - 📱 **Mobile-First Design**: Touch-optimized interactions, responsive breakpoints (md/lg/xl), pointer-fine event handling
 - 🧭 **Professional Navigation**: 4 mega menus with preview images, desktop mega-menu with hover effects, mobile hamburger with collapsible submenus
