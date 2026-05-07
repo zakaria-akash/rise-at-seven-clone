@@ -10,7 +10,7 @@ const POSTS = [
     authorImg: "https://rise-atseven.transforms.svdcdn.com/production/images/blog/import/84b3917f166d7feb4c2376f78ce33ae432656999.jpg?w=80&h=80&q=100&auto=format&fit=crop&dm=1750847674",
     readTime: "2 mins",
     title: "Ryan McNamara Is Now Rise at Seven's Global Operations Director",
-    image: "https://rise-atseven.transforms.svdcdn.com/production/images/0B5A7827.jpg?w=600&h=600&q=80&auto=format&fit=crop&dm=1777514348",
+    image: "/images/whats-new/whats-new-card1.jpg",
   },
   {
     href: "https://riseatseven.com/blog/coneys-chooses-riseatseven-for-demand-brief-2/",
@@ -19,7 +19,7 @@ const POSTS = [
     authorImg: "https://rise-atseven.transforms.svdcdn.com/production/images/blog/import/WhatsApp-Image-2025-06-23-at-22.50.52.jpeg?w=80&h=80&q=100&auto=format&fit=crop&dm=1750949501",
     readTime: "2 mins",
     title: "Rise at Seven Appointed by Coneys to Drive Demand and Retail Growth",
-    image: "https://rise-atseven.transforms.svdcdn.com/production/images/3-copy.jpg?w=600&h=600&q=80&auto=format&fit=crop&dm=1776098692",
+    image: "/images/whats-new/whats-new-card2.jpg",
   },
   {
     href: "https://riseatseven.com/blog/noomz-chooses-riseatseven-for-demand-brief/",
@@ -28,7 +28,7 @@ const POSTS = [
     authorImg: "https://rise-atseven.transforms.svdcdn.com/production/images/blog/import/WhatsApp-Image-2025-06-23-at-22.50.52.jpeg?w=80&h=80&q=100&auto=format&fit=crop&dm=1750949501",
     readTime: "2 mins",
     title: "Noomz Chooses Rise at Seven for Demand Strategy",
-    image: "https://rise-atseven.transforms.svdcdn.com/production/images/Noomz1-4.jpg?w=600&h=600&q=80&auto=format&fit=crop&dm=1775034474",
+    image: "/images/whats-new/whats-new-card3.jpg",
   },
 ];
 
@@ -42,12 +42,14 @@ function BlogCard({ post }) {
       <div className="w-full grid">
         {/* Blurred background layer (revealed on hover via circle mask) */}
         <div className="col-start-1 row-start-1 z-10 relative rounded-2xl lg:rounded-3xl overflow-hidden aspect-square">
-          <div className="w-full h-full transition blur-md duration-1000 scale-120 circle-mask">
-            <img 
-              src={post.image} 
-              alt="" 
-              className="h-full w-full object-cover absolute top-0 left-0" 
-              loading="lazy" 
+          <div className="w-full h-full transition-all duration-700 ease-out blur-md scale-110 circle-mask">
+            <img
+              src={post.image}
+              alt=""
+              className="h-full w-full object-cover absolute top-0 left-0"
+              loading="eager"
+              decoding="async"
+              fetchPriority="low"
             />
           </div>
         </div>
@@ -60,13 +62,14 @@ function BlogCard({ post }) {
               </div>
             </div>
           </div>
-          <img 
-            src={post.image} 
-            alt={post.title} 
-            className="h-full w-full object-cover absolute top-0 left-0 transition-opacity duration-500" 
-            loading="lazy" 
-            onLoad={(e) => { e.currentTarget.style.opacity = "1"; }}
-            style={{ opacity: 0 }}
+          <img
+            src={post.image}
+            alt={post.title}
+            className="h-full w-full object-cover absolute top-0 left-0 transition-opacity duration-700 ease-out"
+            loading="eager"
+            decoding="async"
+            fetchPriority="low"
+            style={{ opacity: 1 }}
           />
         </div>
       </div>
@@ -75,15 +78,11 @@ function BlogCard({ post }) {
       <div className="flex flex-col items-start gap-y-3">
         <div className="flex items-center gap-1 mt-1">
           <div className="inline-flex items-center font-medium tracking-tight leading-none rounded-full text-sm gap-x-2 px-3 py-1 text-grey-300 bg-white">
-            <div className="inline-flex items-center justify-center -ml-1.5">
-              <div className="rounded-full overflow-hidden -mr-1 w-5 h-5">
-                <img src={post.authorImg} alt={post.author} className="w-full h-full object-cover" />
-              </div>
-            </div>
+            <i className="fa-sharp fa-regular fa-circle-user text-xs" aria-hidden="true" />
             <span>{post.author}</span>
           </div>
           <div className="inline-flex items-center font-medium tracking-tight leading-none rounded-full text-sm gap-x-2 px-3 py-1 text-grey-300 bg-white">
-            <i className="fa-sharp fa-regular fa-stopwatch" aria-hidden="true" />
+            <i className="fa-sharp fa-regular fa-clock text-xs" aria-hidden="true" />
             <span>{post.readTime}</span>
           </div>
         </div>
@@ -104,7 +103,7 @@ export default function BlogSection() {
       const { Swiper } = await import("swiper");
       const { Pagination } = await import("swiper/modules");
       if (!swiperRef.current) return;
-      
+
       sw = new Swiper(swiperRef.current, {
         modules: [Pagination],
         slidesPerView: 1.15,
@@ -117,9 +116,9 @@ export default function BlogSection() {
           1024: { loop: false, slidesPerView: 3, spaceBetween: 15, slidesOffsetBefore: 0 },
           1280: { loop: false, slidesPerView: 3, spaceBetween: 20, slidesOffsetBefore: 0 },
         },
-        pagination: { 
-          el: ".blog-pagination", 
-          type: "progressbar" 
+        pagination: {
+          el: ".blog-pagination",
+          type: "progressbar"
         },
       });
     };
@@ -141,7 +140,7 @@ export default function BlogSection() {
                   style={{ width: "0.7em", height: "0.85em" }}
                 >
                   <img
-                    src="https://rise-atseven.transforms.svdcdn.com/production/images/FOS25-3380.jpg?w=200&h=200&q=80&auto=format&fit=crop&dm=1750846499"
+                    src="/images/whats-new/whats-new-title-logo.jpg"
                     alt=""
                     className="w-full h-full object-cover absolute inset-0"
                   />
@@ -165,8 +164,17 @@ export default function BlogSection() {
             </div>
           </div>
 
+          {/* Mobile list */}
+          <div className="col-span-12 px-4 md:px-7 lg:hidden">
+            <div className="flex flex-col gap-y-6">
+              {POSTS.map((post) => (
+                <BlogCard key={post.title} post={post} />
+              ))}
+            </div>
+          </div>
+
           {/* Carousel */}
-          <div className="col-span-12 lg:px-7">
+          <div className="col-span-12 lg:px-7 hidden lg:block">
             <div ref={swiperRef} className="swiper w-full">
               <div className="swiper-wrapper">
                 {POSTS.map((post, i) => (
@@ -178,15 +186,15 @@ export default function BlogSection() {
             </div>
             {/* Pagination Progress Bar */}
             <div className="px-4 md:px-0 mt-8">
-               <div className="blog-pagination swiper-pagination !relative !w-full" />
+              <div className="blog-pagination swiper-pagination !relative !w-full" />
             </div>
           </div>
-          
+
           {/* Mobile CTA */}
           <div className="col-span-12 px-4 md:hidden">
-             <a href="https://riseatseven.com/blog/" className="btn btn--white w-full justify-center">
-                Explore More Thoughts
-             </a>
+            <a href="https://riseatseven.com/blog/" className="btn btn--white w-full justify-center">
+              Explore More Thoughts
+            </a>
           </div>
         </div>
       </div>

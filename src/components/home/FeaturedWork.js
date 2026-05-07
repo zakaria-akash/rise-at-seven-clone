@@ -119,7 +119,7 @@ export default function FeaturedWork() {
     <section className="w-full pb-12 xl:pb-24">
       <div className="w-full px-4 md:px-7">
         <div ref={triggerRef} className="w-full relative -my-7 flex overflow-hidden pointer-fine:overflow-visible">
-          <div className="w-full py-7 top-0 h-[110svh] pointer-fine:h-svh pointer-fine:sticky">
+          <div className="w-full py-7 top-0 pointer-fine:h-svh pointer-fine:sticky">
             <div className="w-full h-full overflow-hidden bg-grey-900 rounded-3xl grid grid-cols-12 px-5 lg:pl-8 xl:pl-10">
 
               {/* LEFT: scrolling titles (desktop only) */}

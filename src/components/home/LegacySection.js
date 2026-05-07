@@ -11,7 +11,7 @@ const CARDS = [
     rotate: 4,
     zIndex: 2,
     title: "Pioneers",
-    image: "https://rise-atseven.transforms.svdcdn.com/production/images/b2087e0cd3f699d3efc76f809ec72a85a6ab378e-1080x1350.jpg?w=400&h=400&q=80&auto=format&fit=crop&dm=1750847630",
+    image: "/images/driving-demand-logo.jpg",
     body: [
       "We're dedicated to creating the industry narrative that others follow 3 years from now. We paved the path for creative SEO, multi-channel search with Digital PR, and Social Search and we will continue to do it.",
       "We're on a mission to be the first search-first agency to win a Cannes Lion disrupting the status quo.",
@@ -25,7 +25,7 @@ const CARDS = [
     rotate: 8,
     zIndex: 1,
     title: "Award Winning",
-    image: "https://rise-atseven.transforms.svdcdn.com/production/images/d4df0d30-d590-4e94-9056-9491f4beacba.JPG?w=400&h=400&q=80&auto=format&fit=crop&dm=1750847714",
+    image: "/images/driving-demand-logo.jpg",
     body: [
       "A roll top bath full of 79 awards. Voted The Drum's best agency outside of London. We are official judges for industry awards including Global Search Awards and Global Content Marketing Awards.",
     ],
@@ -38,7 +38,7 @@ const CARDS = [
     rotate: 12,
     zIndex: 0,
     title: "Speed",
-    image: "https://rise-atseven.transforms.svdcdn.com/production/images/Screenshot-2025-06-23-at-23.15.19.png?w=400&h=400&q=80&auto=format&fit=crop&dm=1750847626",
+    image: "/images/driving-demand-logo.jpg",
     body: [
       "People ask us why we are called Rise at Seven? Ever heard the saying Early Bird catches the worm? Google is moving fast, but humans are moving faster. We chase consumers, not algorithms. We've created a service which takes ideas to result within 60 minutes.",
     ],

@@ -32,8 +32,8 @@ export default function Home() {
 
         {/* What's New — blog posts Swiper carousel */}
         <BlogSection />
-      </main>
 
+      </main>
       <ReadyToRise />
       <Footer />
     </>

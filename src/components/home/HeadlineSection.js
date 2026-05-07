@@ -6,7 +6,7 @@ export default function HeadlineSection() {
   return (
     <section className="w-full py-12 xl:py-24">
       <div className="w-full px-4 md:px-7">
-        <div className="w-full flex justify-between items-start flex-col-reverse md:flex-row gap-x-3 md:gap-x-5 gap-y-3 md:gap-y-5">
+        <div className="w-full flex flex-col-reverse md:flex-row items-center md:items-start justify-center md:justify-between gap-x-3 md:gap-x-5 gap-y-3 md:gap-y-5 text-center md:text-left">
 
           {/* Left: description */}
           <div className="w-full mb-1 md:mt-2 md:mb-0 max-w-sm xl:max-w-xl">
@@ -21,9 +21,9 @@ export default function HeadlineSection() {
 
           {/* Right: large heading + CTAs */}
           <div className="w-full grid max-w-[24rem] md:max-w-[40rem] xl:max-w-xl gap-y-3 md:gap-y-7">
-            <h2 className="inline-flex flex-wrap text-balance relative flex-col text-left text-grey-900 text-5xl md:text-6xl xl:text-7xl font-medium tracking-tight font-sans-primary leading-none">
+            <h2 className="inline-flex flex-wrap text-balance relative flex-col text-center md:text-left text-grey-900 text-5xl md:text-6xl xl:text-7xl font-medium tracking-tight font-sans-primary leading-none">
               {/* Inline word flow with embedded image */}
-              <span className="flex flex-wrap gap-x-3 items-baseline">
+              <span className="flex flex-wrap gap-x-3 items-baseline justify-center md:justify-start">
                 <span>Driving</span>
                 <span>Demand</span>
                 <span>&amp;</span>
@@ -35,7 +35,7 @@ export default function HeadlineSection() {
                   aria-hidden="true"
                 >
                   <img
-                    src="https://rise-atseven.transforms.svdcdn.com/production/images/b2087e0cd3f699d3efc76f809ec72a85a6ab378e-1080x1350.jpg?w=200&h=200&q=90&auto=format&fit=crop&dm=1750847630"
+                    src="/images/driving-demand-logo.jpg"
                     alt=""
                     className="w-full h-full object-cover object-center absolute inset-0"
                   />
