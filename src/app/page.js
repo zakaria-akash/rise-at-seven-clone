@@ -17,14 +17,15 @@ export default function Home() {
         {/* Full-viewport hero with reveal animation */}
         <Hero />
 
+        {/* Client logos infinite carousel */}
+        <Clients />
+
         {/* About / "Driving Demand & Discovery" headline */}
         <HeadlineSection />
 
+
         {/* Featured Work — dark section with parallax names + circle-mask cards */}
         <FeaturedWork />
-
-        {/* Client logos infinite carousel */}
-        <Clients />
 
         {/* Legacy In The Making — stacked cards with GSAP scroll animation */}
         <LegacySection />

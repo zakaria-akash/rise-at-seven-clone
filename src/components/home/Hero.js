@@ -2,12 +2,9 @@
 
 import { useEffect, useRef } from "react";
 
-// Random pool of hero background images from the reference site
+// Hero background image
 const HERO_IMAGES = [
-  "https://rise-atseven.transforms.svdcdn.com/production/images/unnamed-6.png?w=1200&h=1500&q=100&auto=format&fit=crop&dm=1750948726",
-  "https://rise-atseven.transforms.svdcdn.com/production/images/RedBull-Instagram-Post-45.png?w=1890&h=2363&q=100&auto=format&fit=crop&dm=1753775231",
-  "https://rise-atseven.transforms.svdcdn.com/production/images/Emirates-airpline-in-flight.avif?w=1330&h=700&q=100&auto=format&fit=crop&dm=1750948034",
-  "https://rise-atseven.transforms.svdcdn.com/production/images/Screenshot-2025-07-01-at-21.36.35.png?w=1198&h=1126&q=100&auto=format&fit=crop&dm=1751402284",
+  "/images/HeroBG.png",
 ];
 
 // Platform logos from the reference site
@@ -77,33 +74,53 @@ export default function Hero() {
         <div
           ref={bgRef}
           className="absolute inset-0 rounded-2xl overflow-hidden bg-grey-900 bg-cover bg-center"
+          style={{ filter: "blur(8px)" }}
           aria-hidden="true"
         />
         {/* Gradient overlay */}
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
 
+        {/* Center content */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center z-10 p-4">
+          {/* Main title with embedded image */}
+          <h1 className="text-center text-white text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-sans-primary font-medium tracking-tight leading-tight">
+            <div className="flex flex-wrap justify-center gap-2 md:gap-3">
+              <span>We</span>
+              <span>Create</span>
+            </div>
+            <div className="flex flex-wrap justify-center items-center gap-2 md:gap-3 mt-2 md:mt-0">
+              <span>Category</span>
+              <div className="inline-block w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 bg-black/10 rounded-lg overflow-hidden flex-shrink-0">
+                <img
+                  src="/images/HeroBG.png"
+                  alt="Hero background"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <span>Leaders</span>
+            </div>
+          </h1>
+
+          {/* Subtitle */}
+          <div className="mt-4 md:mt-6 text-white text-lg md:text-xl lg:text-2xl font-sans-primary font-medium text-center">
+            on every searchable platform
+          </div>
+        </div>
+
         {/* Bottom content */}
         <div className="absolute bottom-0 left-0 z-30 w-full p-7 flex items-end justify-between gap-4">
-          {/* Tagline */}
+          {/* Left tagline */}
           <div className="hidden flex-shrink-0 md:inline max-w-xs">
             <p className="text-sm lg:text-base font-medium leading-normal text-white">
-              Organic media planners creating, distributing &amp; amplifying content that drives demand &amp; discovery
+              Organic media planners creating, distributing &amp; optimising search-first content for SEO, Social, PR, AI and LLM search
             </p>
           </div>
 
-          {/* Platform logos + CTA */}
-          <div className="flex flex-col items-end gap-4 w-full md:w-auto">
-            <div className="flex items-center gap-4 flex-wrap justify-end">
-              {PLATFORM_LOGOS.map((logo) => (
-                <div key={logo.name} className="w-14 lg:w-16 aspect-[20/9] relative opacity-90">
-                  <img src={logo.src} alt={logo.name} className="w-full h-full object-contain" loading="lazy" />
-                </div>
-              ))}
-            </div>
-            <a href="https://riseatseven.com/work/" className="btn btn--mint flex-row-reverse">
-              <span>View Our Work</span>
-              <i className="fa-regular fa-sharp fa-arrow-up-right text-xs" aria-hidden="true" />
-            </a>
+          {/* Right text */}
+          <div className="hidden flex-shrink-0 md:inline max-w-xs text-right">
+            <p className="text-sm lg:text-base font-medium leading-normal text-white">
+              4 Global Offices serving<br />UK, USA (New York) &amp; EU
+            </p>
           </div>
         </div>
       </section>

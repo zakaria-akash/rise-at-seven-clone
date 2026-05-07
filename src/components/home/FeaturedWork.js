@@ -5,40 +5,70 @@ import { cn } from "@/lib/cn";
 
 const WORKS = [
   {
-    id: 8366, label: "SIXT", period: "[2023-2025]", colour: "#cb7b3a", category: "Car rental",
-    outcome: "An extra 3m clicks regionally through SEO",
-    image: "https://rise-atseven.transforms.svdcdn.com/production/images/Logos/Client/Black/sixt-1.jpg?w=800&h=600&q=80&auto=format&fit=crop&dm=1750847611",
+    id: 8366, label: "Project One", period: "[2023-2025]", colour: "#cb7b3a", category: "Strategy",
+    outcome: "Driving significant growth through strategic implementation",
+    image: "/images/featured-worked/featured-work-card1.png",
     href: "https://riseatseven.com/work/sixt/",
   },
   {
-    id: 7670, label: "Dojo - B2B", period: "[2021-2025]", colour: "#fdd8c4", category: "Card Machines",
-    outcome: "A B2B success story for Dojo card machines",
-    image: "https://rise-atseven.transforms.svdcdn.com/production/images/dojo-go-product-shot-1.jpg?w=800&h=600&q=80&auto=format&fit=crop&dm=1750847714",
+    id: 7670, label: "Project Two", period: "[2021-2025]", colour: "#fdd8c4", category: "Development",
+    outcome: "Building innovative solutions for modern challenges",
+    image: "/images/featured-worked/featured-work-card2.png",
     href: "https://riseatseven.com/work/dojo/",
   },
   {
-    id: 19708, label: "Magnet Trade - B2B", period: "[2023-2024]", colour: "#d8c4fd", category: "B2B Trade",
-    outcome: "Dominating Google and AI search",
-    image: "https://rise-atseven.transforms.svdcdn.com/production/images/Screenshot-2026-02-07-at-17.01.43.png?w=800&h=600&q=80&auto=format&fit=crop&dm=1770483725",
+    id: 19708, label: "Project Three", period: "[2023-2024]", colour: "#d8c4fd", category: "Design",
+    outcome: "Creating exceptional user experiences and interfaces",
+    image: "/images/featured-worked/featured-work-card3.png",
     href: "https://riseatseven.com/work/magnet-trade-b2b/",
   },
   {
-    id: 17067, label: "JD Sports", period: "[2025]", colour: "#3a8ccb", category: "Trainers",
-    outcome: "65% up YoY in clicks for JDSports FR, IT, ES",
-    image: "https://rise-atseven.transforms.svdcdn.com/production/images/maxresdefault_2025-10-22-141838_nmnu.jpg?w=800&h=600&q=80&auto=format&fit=crop&dm=1761142718",
+    id: 17067, label: "Project Four", period: "[2025]", colour: "#3a8ccb", category: "Marketing",
+    outcome: "Amplifying brand presence and market reach",
+    image: "/images/featured-worked/featured-work-card4.png",
     href: "https://riseatseven.com/work/jd-sports-/",
   },
   {
-    id: 8221, label: "Parkdean Resorts", period: "[2019-2025]", colour: "#d2b59d", category: "Easter Breaks",
-    outcome: "Dominating Google and AI search",
-    image: "https://rise-atseven.transforms.svdcdn.com/production/images/easter-breaks.jpg?w=800&h=600&q=80&auto=format&fit=crop&dm=1750847715",
+    id: 8221, label: "Project Five", period: "[2019-2025]", colour: "#d2b59d", category: "Branding",
+    outcome: "Establishing strong brand identity and values",
+    image: "/images/featured-worked/featured-work-card5.png",
     href: "https://riseatseven.com/work/parkdean-resorts-easter-breaks/",
   },
   {
-    id: 27, label: "Revolution Beauty", period: "[2022-2025]", colour: "#fecacc", category: "Beauty",
-    outcome: "Scaling organic reach for a DTC beauty brand",
-    image: "https://rise-atseven.transforms.svdcdn.com/production/images/0B5A6875.jpg?w=800&h=600&q=80&auto=format&fit=crop&dm=1774455015",
+    id: 27, label: "Project Six", period: "[2022-2025]", colour: "#fecacc", category: "Analytics",
+    outcome: "Measuring impact through data-driven insights",
+    image: "/images/featured-worked/featured-work-card6.png",
     href: "https://riseatseven.com/work/revolution-beauty/",
+  },
+  {
+    id: 28, label: "Project Seven", period: "[2023-2025]", colour: "#a8d5ba", category: "SEO",
+    outcome: "Optimizing online visibility and search performance",
+    image: "/images/featured-worked/featured-work-card7.png",
+    href: "#",
+  },
+  {
+    id: 29, label: "Project Eight", period: "[2022-2024]", colour: "#ffb6c1", category: "Content",
+    outcome: "Crafting compelling narratives and messaging",
+    image: "/images/featured-worked/featured-work-card8.png",
+    href: "#",
+  },
+  {
+    id: 30, label: "Project Nine", period: "[2024-2025]", colour: "#87ceeb", category: "Social",
+    outcome: "Building engaged communities and social presence",
+    image: "/images/featured-worked/featured-work-card9.png",
+    href: "#",
+  },
+  {
+    id: 31, label: "Project Ten", period: "[2023-2025]", colour: "#daa520", category: "Automation",
+    outcome: "Streamlining processes through intelligent automation",
+    image: "/images/featured-worked/featured-work-card10.png",
+    href: "#",
+  },
+  {
+    id: 32, label: "Project Eleven", period: "[2024-2025]", colour: "#20b2aa", category: "Integration",
+    outcome: "Seamlessly connecting systems and workflows",
+    image: "/images/featured-worked/featured-work-card11.png",
+    href: "#",
   },
 ];
 
@@ -132,6 +162,14 @@ export default function FeaturedWork() {
           </div>
         </div>
       </div>
+
+      {/* View Our Work CTA Button */}
+      <div className="flex justify-center mt-12 xl:mt-16">
+        <a href="https://riseatseven.com/work/" className="btn btn--mint flex-row-reverse">
+          <span>View Our Work</span>
+          <i className="fa-regular fa-sharp fa-arrow-up-right text-xs" aria-hidden="true" />
+        </a>
+      </div>
     </section>
   );
 }
@@ -147,8 +185,8 @@ function WorkCard({ work, isActive, onEnter, onLeave }) {
       <div className="col-start-1 row-start-1 transition group-hover:scale-105">
         <div className="relative overflow-hidden w-full" style={{ paddingTop: "75%" }}>
           <img src={work.image} alt={work.label}
-            className="absolute inset-0 w-full h-full object-cover transition-opacity" loading="lazy"
-            style={{ opacity: 0 }} onLoad={(e) => { e.currentTarget.style.opacity = "1"; }} />
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
+            style={{ opacity: 1 }} />
         </div>
       </div>
 
